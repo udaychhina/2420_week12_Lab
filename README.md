@@ -28,7 +28,7 @@ After you have installed nginx, you should run the following command to confirm 
 
 ## Creating html and server block
 
-Create an index.html: 
+This is the html file that will be served by nginx:
 
 ```html
 <!DOCTYPE html>
@@ -54,9 +54,9 @@ Create an index.html:
 </html>
 ```
 
-Create the server block: 
+The server block points to the html file that will be served by nginx. This is the server block:
 
-```
+```nginx
 server {
         listen 80;
         listen [::]:80;
@@ -80,11 +80,21 @@ Now we will use rsync to copy the files to the server. Then we will move them to
 
 ![](./images/rsync.png)
 
+Move them to the correct location:
+
 ![](./images/makehtmldir.png)
 
 ![](./images/copy1.png)
 
 ![](./images/copy2.png)
+
+Make sure that the files have the correct permissions:
+
+![](./images/permissions.png)
+
+The next step is to make a symlink for the server block from the
+`sites-available/` to `sites-enabled/` directories in order for nginx to
+recognize which sites have been enabled out of the ones that are available.
 
 Create the symlink:
 
@@ -93,6 +103,11 @@ Create the symlink:
 After you're done, reload the nginx service:
 
 ![](./images/reloadnginx.png)
+
+After this step, you should be able to access the website through the IP
+address of the server: [146.190.34.125](http://146.190.34.125).
+
+
 
 ---
 
